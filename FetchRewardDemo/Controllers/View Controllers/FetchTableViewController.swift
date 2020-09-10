@@ -14,16 +14,15 @@ class FetchTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemPink
         configureTableView()
         configureNavigationBar()
     }
     
     private func configureTableView() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableViewDelegates()
         view.addSubview(tableView)
+        tableView.addConstraintsToFillView(view)
     }
     
     private func tableViewDelegates() {
