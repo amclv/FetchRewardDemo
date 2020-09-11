@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A6717FE250B306A007AEF30 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6717FD250B306A007AEF30 /* ItemTableViewCell.swift */; };
 		1A716EF1250AA696000E038C /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A716EF0250AA696000E038C /* Item.swift */; };
 		1A716EF6250AA764000E038C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A716EF5250AA764000E038C /* NetworkManager.swift */; };
 		1A716EF9250AA97C000E038C /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A716EF8250AA97C000E038C /* UIView+Extensions.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A6717FD250B306A007AEF30 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		1A716EF0250AA696000E038C /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		1A716EF5250AA764000E038C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		1A716EF8250AA97C000E038C /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -43,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A6717FC250B3059007AEF30 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1A6717FD250B306A007AEF30 /* ItemTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		1A716EEF250AA616000E038C /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,8 +116,9 @@
 			children = (
 				1A716EF7250AA96E000E038C /* Utilities */,
 				1A716EEF250AA616000E038C /* Model */,
-				5D52B6AC250A89FA0008E640 /* Resources */,
 				1A716EF2250AA743000E038C /* Controllers */,
+				1A6717FC250B3059007AEF30 /* Views */,
+				5D52B6AC250A89FA0008E640 /* Resources */,
 			);
 			path = FetchRewardDemo;
 			sourceTree = "<group>";
@@ -198,6 +209,7 @@
 				1A716EF1250AA696000E038C /* Item.swift in Sources */,
 				5D02AF11250A8DA900AAFC62 /* FetchTableViewController.swift in Sources */,
 				1A716EF6250AA764000E038C /* NetworkManager.swift in Sources */,
+				1A6717FE250B306A007AEF30 /* ItemTableViewCell.swift in Sources */,
 				1A716EFB250AA98E000E038C /* UIColor+Extensions.swift in Sources */,
 				5D52B699250A89830008E640 /* AppDelegate.swift in Sources */,
 				5D52B69B250A89830008E640 /* SceneDelegate.swift in Sources */,

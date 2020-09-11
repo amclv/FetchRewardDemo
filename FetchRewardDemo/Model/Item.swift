@@ -10,14 +10,15 @@ import Foundation
 
 struct ItemElement: Codable {
     let id: Int
-    let listID: Int
+    let listId: Int
     let name: String?
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
-        case listID = "listId"
+        case listId = "listId"
         case name = "name"
     }
 }
 
 typealias Item = [ItemElement]
+
