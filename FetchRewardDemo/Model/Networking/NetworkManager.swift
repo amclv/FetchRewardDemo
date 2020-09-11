@@ -44,9 +44,10 @@ class NetworkManager {
             
             let jsonDecoder = JSONDecoder()
             do {
-                let item = try jsonDecoder.decode(Item.self, from: data)
+                let items = try jsonDecoder.decode([Item].self, from: data)
+                self.itemArray = items
                 DispatchQueue.main.async {
-                    self.itemArray.append(item)
+                    self.itemArray = self.itemArray.filter { ($0.name?.contains(" ") ?? false) }
                     completion()
                 }
             } catch {

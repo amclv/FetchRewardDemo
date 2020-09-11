@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ItemElement: Codable {
+struct Item: Codable {
     let id: Int
     let listId: Int
     let name: String?
@@ -20,5 +20,5 @@ struct ItemElement: Codable {
     }
 }
 
-typealias Item = [ItemElement]
+typealias Items = [Item]
 

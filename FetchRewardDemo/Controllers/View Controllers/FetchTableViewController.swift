@@ -51,14 +51,19 @@ class FetchTableViewController: UIViewController {
 
 extension FetchTableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(networkManager.itemArray.count)
         return networkManager.itemArray.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ItemTableViewCell.identifier, for: indexPath) as! ItemTableViewCell
-        let item = networkManager.itemArray[indexPath.row]
-        cell.textLabel?.text = item[indexPath.row].name
-        cell.detailTextLabel?.text = "\(item[indexPath.row].id)"
+        let items = networkManager.itemArray[indexPath.row]
+        cell.textLabel?.text = items.name
+        cell.detailTextLabel?.text = "\(items.id)"
         return cell
     }
 }
