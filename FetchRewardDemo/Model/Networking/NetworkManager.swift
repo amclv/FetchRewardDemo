@@ -25,7 +25,7 @@ enum RequestMethod: String {
 class NetworkManager {
     let baseURL = URL(string: "https://fetch-hiring.s3.amazonaws.com/hiring.json")
 
-    var itemArray: [Item] = []
+    var itemArray = [Item]()
 
     func fetchItems(completion: @escaping () -> Void) {
         var request = URLRequest(url: baseURL!)
@@ -47,7 +47,6 @@ class NetworkManager {
                 let items = try jsonDecoder.decode([Item].self, from: data)
                 self.itemArray = items
                 DispatchQueue.main.async {
-                    self.itemArray = self.itemArray.filter { ($0.name?.contains(" ") ?? false) }
                     completion()
                 }
             } catch {
