@@ -15,7 +15,6 @@ class FetchTableViewController: UIViewController {
     
     // MARK: - Variables
     let tableView = UITableView()
-    var items: Items!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,17 +33,9 @@ class FetchTableViewController: UIViewController {
     private func fetchData() {
         networkManager.fetchItems {
             DispatchQueue.main.async {
-                self.filteringData()
                 self.tableView.reloadData()
             }
         }
-    }
-    
-    private func filteringData() {
-        self.networkManager.itemArray.sort() {
-            $0.listId < $1.listId
-        }
-        self.networkManager.itemArray = self.networkManager.itemArray.filter { ($0.name?.contains(" ") ?? false) }
     }
     
     private func tableViewDelegates() {
@@ -59,32 +50,34 @@ class FetchTableViewController: UIViewController {
 }
 
 extension FetchTableViewController: UITableViewDelegate, UITableViewDataSource {
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return items.count
-//    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return networkManager.itemArray.count
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return networkManager.itemArray[section + 1]?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let section = networkManager.itemArray[section + 1]?[0].listId else { return nil }
         let label = UILabel()
-        label.text = items.listId
-        label.backgroundColor = .lightGray
+        label.text = "Section \(section)"
+        label.backgroundColor = .systemRed
         return label
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ItemTableViewCell.identifier, for: indexPath) as! ItemTableViewCell
-        let item = self.items[indexPath.row]
+        if let sectItems = networkManager.itemArray[indexPath.section + 1]?[indexPath.row] {
+            cell.textLabel?.text = sectItems.name
+            cell.detailTextLabel?.text = "\(sectItems.id)"
+        }
         
-        cell.textLabel?.text = item.name
-        cell.detailTextLabel?.text = "\(item.id)"
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50.0
+        return 30
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -12,12 +12,6 @@ struct Item: Codable {
     let id: Int
     let listId: Int
     let name: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case listId = "listId"
-        case name = "name"
-    }
 }
 
 typealias Items = [Item]

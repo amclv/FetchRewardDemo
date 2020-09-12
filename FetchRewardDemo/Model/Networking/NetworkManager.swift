@@ -23,11 +23,11 @@ enum RequestMethod: String {
 }
 
 class NetworkManager {
-    let baseURL = URL(string: "https://fetch-hiring.s3.amazonaws.com/hiring.json")
 
-    var itemArray = [Item]()
+    var itemArray: [Int: [Item]] = [:]
 
     func fetchItems(completion: @escaping () -> Void) {
+        let baseURL = URL(string: "https://fetch-hiring.s3.amazonaws.com/hiring.json")
         var request = URLRequest(url: baseURL!)
         request.httpMethod = RequestMethod.get.rawValue
         
@@ -44,8 +44,37 @@ class NetworkManager {
             
             let jsonDecoder = JSONDecoder()
             do {
-                let items = try jsonDecoder.decode([Item].self, from: data)
-                self.itemArray = items
+                var items = try jsonDecoder.decode([Item].self, from: data)
+                items = items.filter { $0.name != nil && $0.name != "" }
+                items = items.sorted(by: {
+                    // guaranteed != nil in filter operation
+                    let name1 = $0.name!
+                    let name2 = $1.name!
+                    
+                    var number1 = ""
+                    var number2 = ""
+                    
+                    for char in name1 {
+                        if char.isNumber {
+                            number1.append(char)
+                        }
+                    }
+                    
+                    for char in name2 {
+                        if char.isNumber {
+                            number2.append(char)
+                        }
+                    }
+                    return Int(number1) ?? 0 < Int(number2) ?? 0
+                })
+                
+                for item in items {
+                    if self.itemArray[item.listId] != nil {
+                        self.itemArray[item.listId]?.append(item)
+                    } else {
+                        self.itemArray[item.listId] = [item]
+                    }
+                }
                 DispatchQueue.main.async {
                     completion()
                 }
