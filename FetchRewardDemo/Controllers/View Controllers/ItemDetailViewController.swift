@@ -42,5 +42,4 @@ class ItemDetailViewController: UIViewController {
         listId.textColor = .black
         itemVStack.addArrangedSubview(id)
     }
-    
 }

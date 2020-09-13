@@ -19,8 +19,12 @@ class FetchTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        configureNavigationBar()
         fetchData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        configureNavigationBar()
     }
     
     private func configureTableView() {
@@ -62,6 +66,7 @@ extension FetchTableViewController: UITableViewDelegate, UITableViewDataSource {
         guard let section = networkManager.itemArray[section + 1]?[0].listId else { return nil }
         let label = UILabel()
         label.text = "Section \(section)"
+        label.textAlignment = .center
         label.backgroundColor = .systemRed
         return label
     }
@@ -84,15 +89,15 @@ extension FetchTableViewController: UITableViewDelegate, UITableViewDataSource {
         vc.id.text = "Id: \(selectedItems.id)"
         vc.listId.text = "Section: \(selectedItems.listId)"
         vc.name.text = "Name: \(name)"
+        tableView.deselectRow(at: indexPath, animated: true)
         navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        return 50.0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
 }
