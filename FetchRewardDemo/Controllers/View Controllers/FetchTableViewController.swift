@@ -69,11 +69,22 @@ extension FetchTableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ItemTableViewCell.identifier, for: indexPath) as! ItemTableViewCell
         if let sectItems = networkManager.itemArray[indexPath.section + 1]?[indexPath.row] {
+            cell.accessoryType = .disclosureIndicator
             cell.textLabel?.text = sectItems.name
             cell.detailTextLabel?.text = "\(sectItems.id)"
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = ItemDetailViewController()
+        guard let selectedItems = networkManager.itemArray[indexPath.section + 1]?[indexPath.row],
+            let name = selectedItems.name else { return }
+        vc.id.text = "Id: \(selectedItems.id)"
+        vc.listId.text = "Section: \(selectedItems.listId)"
+        vc.name.text = "Name: \(name)"
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
