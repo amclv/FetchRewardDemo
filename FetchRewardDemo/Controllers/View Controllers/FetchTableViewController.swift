@@ -76,7 +76,7 @@ extension FetchTableViewController: UITableViewDelegate, UITableViewDataSource {
         if let sectItems = networkManager.itemArray[indexPath.section + 1]?[indexPath.row] {
             cell.accessoryType = .disclosureIndicator
             cell.textLabel?.text = sectItems.name
-            cell.detailTextLabel?.text = "\(sectItems.id)"
+            cell.detailTextLabel?.text = "Id: \(sectItems.id)"
         }
         
         return cell
@@ -94,7 +94,7 @@ extension FetchTableViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50.0
+        return 40.0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

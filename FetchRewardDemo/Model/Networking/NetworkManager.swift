@@ -50,16 +50,16 @@ class NetworkManager {
                     // guaranteed != nil in filter operation
                     let name1 = $0.name!
                     let name2 = $1.name!
-                    
+
                     var number1 = ""
                     var number2 = ""
-                    
+
                     for char in name1 {
                         if char.isNumber {
                             number1.append(char)
                         }
                     }
-                    
+
                     for char in name2 {
                         if char.isNumber {
                             number2.append(char)
@@ -67,7 +67,7 @@ class NetworkManager {
                     }
                     return Int(number1) ?? 0 < Int(number2) ?? 0
                 })
-                
+
                 for item in items {
                     if self.itemArray[item.listId] != nil {
                         self.itemArray[item.listId]?.append(item)
